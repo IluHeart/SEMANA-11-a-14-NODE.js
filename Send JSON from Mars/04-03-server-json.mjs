@@ -5,9 +5,14 @@ const server = createServer((request, response) => {
 
   response.statusCode = 200;
 
-  response.setHeader("Content-Type", "application/json");
+  const jsonResponse = {
+    location: "Mars",
+  };
 
-  const jsonResponseBody = JSON.stringify({ location: "Earth" });
+  const jsonResponseBody = JSON.stringify(jsonResponse);
+
+  response.setHeader("Content-Type", "application/json");
+  response.setHeader("Content-Length", Buffer.byteLength(jsonResponseBody).toString());
 
   response.end(jsonResponseBody);
 });
